@@ -5,6 +5,7 @@ import com.jezielmonteiro.movies.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -16,6 +17,16 @@ public class MovieController {
     @GetMapping
     public List getAll() {
         return movieRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Movie> findById(@PathVariable Long id) {
+        return movieRepository.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        movieRepository.deleteById(id);
     }
 
     @PostMapping
